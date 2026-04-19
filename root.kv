@@ -1,0 +1,53 @@
+#:kivy 2.3.1
+
+# # 根容器
+BoxLayout:
+    id: "root"
+    orientation: 'vertical'
+    #搜索容器
+    FloatLayout:
+        id: "searchbox"
+        orientation: 'vertical'
+        minimum_sieze: 0
+        #搜索框
+        TextInput:
+            id: "searchinput"
+            hint_text: "Search..."
+            size_hint_y: None
+            height: dp(30)
+            size_hint_x: 0.8
+            pos_hint: {"left":1,"top":1,}
+        Button:
+            text: "searchbutton"
+            size_hint_y: None
+            height: dp(30)
+            size_hint_x: 0.2
+            pos_hint: {"right":1,"top":1,}
+            # on_press: app.search()
+    #筛选容器
+    FloatLayout:
+        id:"filterbox"
+        <CustomButton>:
+            Button:
+                text: "filterbutton"
+                size_hint_y: None
+                height:44
+            Label:
+                text: "filterlabel"
+                size_hint_y: None
+                height:44
+            Button:
+                text: "filterbutton2"
+                size_hint_y: None
+                height:44
+            Label:
+                text: "filterlabel2"
+                size_hint_y: None
+                height:44
+    FloatLayout:
+        id: "resultbox"
+        orientation: 'horizontal'
+        Label:
+            text:"test"
+            pos_hint: {"right":1,"top":1,}
+            
