@@ -1,53 +1,103 @@
 #:kivy 2.3.1
 
-# # 根容器
+# from loguru import logger
+#:import Factory kivy.factory.Factory
+#:import logger loguru.logger
+<ChineseSpinnerOption@SpinnerOption>:
+    font_name: 'simhei.ttf'
+    height: dp(30)
+    text_size: self.width, None
+    valign: 'middle'
+    halign: 'center'
+
+# 根容器
 BoxLayout:
     id: "root"
     orientation: 'vertical'
+    pos_hint: {"left":1,"top":1,}
     #搜索容器
-    FloatLayout:
+    BoxLayout:
         id: "searchbox"
-        orientation: 'vertical'
-        minimum_sieze: 0
+        orientation: 'horizontal'
+        pos_hint: {"left":1,"top":1,}
+        size_hint_y: None
+        height: dp(30)
         #搜索框
         TextInput:
             id: "searchinput"
             hint_text: "Search..."
             size_hint_y: None
-            height: dp(30)
             size_hint_x: 0.8
-            pos_hint: {"left":1,"top":1,}
-        Button:
-            text: "searchbutton"
-            size_hint_y: None
             height: dp(30)
+            pos_hint: {"left":1,"top":1,}
+            font_name: 'simhei.ttf'
+        Button:
+            text: "搜索"
+            size_hint_y: None
             size_hint_x: 0.2
+            height: dp(30)
             pos_hint: {"right":1,"top":1,}
-            # on_press: app.search()
-    #筛选容器
-    FloatLayout:
-        id:"filterbox"
-        <CustomButton>:
-            Button:
-                text: "filterbutton"
-                size_hint_y: None
-                height:44
-            Label:
-                text: "filterlabel"
-                size_hint_y: None
-                height:44
-            Button:
-                text: "filterbutton2"
-                size_hint_y: None
-                height:44
-            Label:
-                text: "filterlabel2"
-                size_hint_y: None
-                height:44
-    FloatLayout:
-        id: "resultbox"
+            font_name: 'simhei.ttf'
+            on_press: app.search()
+    BoxLayout:
         orientation: 'horizontal'
+        id:'filterBox'
+        size_hint_y: None
+        height: dp(30)
+        Spinner:
+            size_hint_y: None
+            size_hint_x: 0.2
+            # pos_hint: {"left":1,"top":0.95,}
+            values: ['全部流派','流行 & 动漫', 'niconico', '东方Project', '原创','彩绿','音击舞萌']
+            text: '流派'
+            option_cls: Factory.ChineseSpinnerOption
+            on_text:logger.info(self.text)
+            height: dp(30)
+            font_name: './simhei.ttf'
+        Spinner:
+            size_hint_y: None
+            size_hint_x: 0.2
+            # pos_hint: {"left":0.8,"top":0.95,}
+            values: ['全部版本','CHUNITHM', 'CHUNITHM PLUS', "CHUNITHM AIR", "CHUNITHM AIR PLUS","CHUNITHM STAR","CHUNITHM STAR PLUS","CHUNITHM AMAZON","CHUNITHM AMAZON PLUS","CHUNITHM CRYSTAL","CHUNITHM CRYSTAL PLUS","CHUNITHM PARADISE","CHUNITHM PARADISE LOST","CHUNITHM NEW","CHUNITHM NEW PLUS","CHUNITHM SUN","CHUNITHM SUN PLUS","CHUNITHM LUMINOUS","CHUNITHM LUMINOUS PLUS","CHUNITHM VERSE"]
+            text: '版本'
+            option_cls: Factory.ChineseSpinnerOption
+            on_text:logger.info(self.text)
+            height: dp(30)
+            font_name: './simhei.ttf'
+        Spinner:
+            size_hint_y: None
+            size_hint_x: 0.2
+            # pos_hint: {"left":0.6,"top":0.95,}
+            values: ['0', '1', '2', '3','4','5','6','7','7.5','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','13','13.5','14','14.5','15','15.5']
+            text: '难度下限'
+            option_cls: Factory.ChineseSpinnerOption
+            on_text:logger.info(self.text)
+            height: dp(30)
+            font_name: './simhei.ttf'
+        Spinner:
+            size_hint_y: None
+            size_hint_x: 0.2
+            # pos_hint: {"left":0.4,"top":0.95,}
+            values: ['0', '1', '2', '3','4','5','6','7','7.9','8','8.9','9','9.9','10','10.9','11','11.9','12','12.9','13','13.9','14','14.9','15','15.9']
+            text: '难度上限'
+            option_cls: Factory.ChineseSpinnerOption
+            on_text:logger.info(self.text)
+            height: dp(30)
+            font_name: './simhei.ttf'
+        Spinner:
+            size_hint_y: None
+            size_hint_x: 0.2
+            # pos_hint: {"left":0.2,"top":0.95,}
+            values: ['不展示收藏','展示收藏']
+            text: '是否展示收藏'
+            option_cls: Factory.ChineseSpinnerOption
+            on_text:logger.info(self.text)
+            height: dp(30)
+            font_name: './simhei.ttf'
+    BoxLayout:
+        orientation: 'vertical'
         Label:
-            text:"test"
-            pos_hint: {"right":1,"top":1,}
-            
+            text: "搜索结果将显示在这里"
+            font_name: 'simhei.ttf'
+            size_hint_y: None
+
