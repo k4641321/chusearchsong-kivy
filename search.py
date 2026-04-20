@@ -1,7 +1,7 @@
 
 import json
 import asyncio
-
+from loguru import logger
 
 #多构建一个歌曲的json
 def 返回歌曲json(id,title,artist,genre,bpm,version,zhversion,difficulties):
@@ -17,7 +17,7 @@ def 返回歌曲json(id,title,artist,genre,bpm,version,zhversion,difficulties):
         "isappend":False,
     }
     return data
-async def 曲目搜索(曲目列表路径:str,分类筛选:str,版本筛选:str,版本筛选中文名,难度筛选前:float or int ,难度筛选后:float or int ,搜索框:str):
+async def 曲目搜索(曲目列表路径:str,分类筛选:str,版本筛选:str,版本筛选中文名,难度筛选前:float ,难度筛选后:float ,搜索框:str):
     with open(曲目列表路径, "r", encoding="UTF-8") as f:
         曲目列表 = json.load(f)
         f.close()
@@ -61,4 +61,5 @@ async def 曲目搜索(曲目列表路径:str,分类筛选:str,版本筛选:str,
     #print(结果2)
     if not 结果2==[]:
         结果=结果2
+    logger.info(结果)
     return 结果

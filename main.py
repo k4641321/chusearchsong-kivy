@@ -3,32 +3,39 @@ kivy.require("2.3.1")
 
 from kivy.app import App
 from search import 曲目搜索
-from kivy.uix.boxlayout import BoxLayout
 from loguru import logger
 from kivy.clock import Clock
 import asyncio
+from kivy.lang import Builder
 
 class root(App):
 
     def build(self):
         logger.info("building..")
-        # 确保返回 KV 文件中定义的根组件
-        # 如果 KV 文件名是 root.kv，Kivy 会自动加载，这里不需要手动 return BoxLayout()
-        
-    async def do_search(self):
-        """执行实际的异步搜索任务"""
         try:
-            # 假设 曲目搜索 是一个 async 函数
-            结果 = await 曲目搜索("resources/list.json", "分类", None, None, 0, 0, "b")
-            logger.info(f"搜索结果: {结果}")
-        except Exception as e:
-            logger.error(f"搜索出错: {e}")
-
-    def search(self):
-        """由按钮触发的同步入口，负责调度异步任务"""
+            self.loop=asyncio.get_event_loop()
+        except RuntimeError:
+            self.loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(self.loop)
+        return Builder.load_file("root.kv")
+    async def search(self):
+        """异步搜索核心逻辑（保持不变）"""
         logger.info("开始搜索...")
-        # 使用 Clock 调度异步任务，避免阻塞 UI
-        Clock.schedule_once(lambda dt: asyncio.ensure_future(self.do_search()), 0)
+        曲目列表路径= "resources/list.json"
+        logger.info(self.root.ids.filterBox.children[1].text)
+        结果 = await 曲目搜索(曲目列表路径,None, None, None, 0, 0, "b")
+        # logger.info(f"搜索结果: {结果}")
+
+    def _run_async_via_clock(self, dt=0):
+            self.loop.run_until_complete(self.search())
+       
+
+    def schedule_search_with_clock(self,):
+        """供KV调用的Clock调度入口（仅触发Clock调度，不直接调用异步函数）"""
+        # 用Clock调度_run_async_via_clock，dt参数是Clock自动传递的时间差，可忽略
+        Clock.schedule_once(self._run_async_via_clock)
+       
 
 if __name__ == "__main__":
+    # Clock.schedule_once(root.schedule_search_with_clock,1)
     root().run()

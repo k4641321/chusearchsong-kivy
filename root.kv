@@ -38,13 +38,14 @@ BoxLayout:
             height: dp(30)
             pos_hint: {"right":1,"top":1,}
             font_name: 'simhei.ttf'
-            on_press: app.search()
+            on_press: app.schedule_search_with_clock()
     BoxLayout:
         orientation: 'horizontal'
         id:'filterBox'
         size_hint_y: None
         height: dp(30)
         Spinner:
+            id: 'genreSpinner'
             size_hint_y: None
             size_hint_x: 0.2
             # pos_hint: {"left":1,"top":0.95,}
@@ -55,6 +56,7 @@ BoxLayout:
             height: dp(30)
             font_name: './simhei.ttf'
         Spinner:
+            id:'versionSpinner'
             size_hint_y: None
             size_hint_x: 0.2
             # pos_hint: {"left":0.8,"top":0.95,}
@@ -65,6 +67,7 @@ BoxLayout:
             height: dp(30)
             font_name: './simhei.ttf'
         Spinner:
+            id:'diffminSpinner'
             size_hint_y: None
             size_hint_x: 0.2
             # pos_hint: {"left":0.6,"top":0.95,}
@@ -75,6 +78,7 @@ BoxLayout:
             height: dp(30)
             font_name: './simhei.ttf'
         Spinner:
+            id:'diffmaxSpinner'
             size_hint_y: None
             size_hint_x: 0.2
             # pos_hint: {"left":0.4,"top":0.95,}
@@ -85,6 +89,7 @@ BoxLayout:
             height: dp(30)
             font_name: './simhei.ttf'
         Spinner:
+            id:'showfavoriteSpinner'
             size_hint_y: None
             size_hint_x: 0.2
             # pos_hint: {"left":0.2,"top":0.95,}
