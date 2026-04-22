@@ -12,19 +12,19 @@
 
 # 根容器
 BoxLayout:
-    id: "root"
+    id: rootbox
     orientation: 'vertical'
     pos_hint: {"left":1,"top":1,}
     #搜索容器
     BoxLayout:
-        id: "searchbox"
+        id: searchbox
         orientation: 'horizontal'
         pos_hint: {"left":1,"top":1,}
         size_hint_y: None
         height: dp(30)
         #搜索框
         TextInput:
-            id: "searchinput"
+            id: searchinput
             hint_text: "Search..."
             size_hint_y: None
             size_hint_x: 0.8
@@ -41,22 +41,22 @@ BoxLayout:
             on_press: app.schedule_search_with_clock()
     BoxLayout:
         orientation: 'horizontal'
-        id:'filterBox'
+        id:filterBox
         size_hint_y: None
         height: dp(30)
         Spinner:
-            id: 'genreSpinner'
+            id: genreSpinner
             size_hint_y: None
             size_hint_x: 0.2
             # pos_hint: {"left":1,"top":0.95,}
-            values: ['全部流派','流行 & 动漫', 'niconico', '东方Project', '原创','彩绿','音击舞萌']
+            values: ['全部流派','流行 & 动漫', 'niconico', '东方Project', '原创','其他游戏','彩绿','音击舞萌']
             text: '流派'
             option_cls: Factory.ChineseSpinnerOption
             on_text:logger.info(self.text)
             height: dp(30)
             font_name: './simhei.ttf'
         Spinner:
-            id:'versionSpinner'
+            id:versionSpinner
             size_hint_y: None
             size_hint_x: 0.2
             # pos_hint: {"left":0.8,"top":0.95,}
@@ -67,7 +67,7 @@ BoxLayout:
             height: dp(30)
             font_name: './simhei.ttf'
         Spinner:
-            id:'diffminSpinner'
+            id:diffminSpinner
             size_hint_y: None
             size_hint_x: 0.2
             # pos_hint: {"left":0.6,"top":0.95,}
@@ -78,7 +78,7 @@ BoxLayout:
             height: dp(30)
             font_name: './simhei.ttf'
         Spinner:
-            id:'diffmaxSpinner'
+            id:diffmaxSpinner
             size_hint_y: None
             size_hint_x: 0.2
             # pos_hint: {"left":0.4,"top":0.95,}
@@ -89,7 +89,7 @@ BoxLayout:
             height: dp(30)
             font_name: './simhei.ttf'
         Spinner:
-            id:'showfavoriteSpinner'
+            id:showfavoriteSpinner
             size_hint_y: None
             size_hint_x: 0.2
             # pos_hint: {"left":0.2,"top":0.95,}
@@ -101,8 +101,4 @@ BoxLayout:
             font_name: './simhei.ttf'
     BoxLayout:
         orientation: 'vertical'
-        Label:
-            text: "搜索结果将显示在这里"
-            font_name: 'simhei.ttf'
-            size_hint_y: None
-
+        id: resultbox
