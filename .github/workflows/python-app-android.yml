@@ -30,7 +30,7 @@ jobs:
         python3-virtualenv autoconf libtool pkg-config zlib1g-dev \
         libncurses5-dev libncursesw5-dev libtinfo6 cmake libffi-dev \
         libssl-dev automake autopoint gettext
-        curl https://sh.rustup.rs -sSf | sh
+        curl https://sh.rustup.rs -sSf | sh -y
 
         python -m pip install --upgrade pip setuptools
         pip install buildozer, setuptools, cython==0.29.34,kivy["full"],aiohttp,loguru
