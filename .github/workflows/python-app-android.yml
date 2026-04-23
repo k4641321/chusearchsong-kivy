@@ -33,7 +33,7 @@ jobs:
         # curl https://sh.rustup.rs -sSf | sh -y
 
         python -m pip install --upgrade pip setuptools
-        pip install buildozer, setuptools, cython==0.29.34,kivy["full"],aiohttp,loguru
+        pip install buildozer setuptools cython==0.29.34 kivy["full"] aiohttp loguru
         buildozer -v android debug
 
     - name: 构建
