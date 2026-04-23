@@ -34,16 +34,21 @@ jobs:
         python -m pip install --upgrade pip setuptools
         pip install buildozer cython==0.29.34 kivy["base"] aiohttp loguru
         
-    - name: Build Android APK
-      env:
-        # Automatically accept Android SDK licenses
-        BUILD_TOOLS_VERSION: "30.0.3"
+    - name: Configure Buildozer and install Android SDK with build-tools
       run: |
-        # Set environment variable to auto-accept licenses
-        export ANDROID_SDK_ROOT="$HOME/.buildozer/android/platform/android-sdk"
-        export PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH"
+        # First build attempt to trigger SDK download
+        echo "Initial build attempt to download SDK..."
+        buildozer android debug --verbose || true
         
-        # Build the APK with verbose output
+        # Manually install build-tools which contains AIDL
+        echo "Installing Android build-tools..."
+        $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager "build-tools;30.0.3"
+        
+        # Accept licenses
+        yes | $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || true
+        
+    - name: Build Android APK
+      run: |
         buildozer -v android debug
         
     - name: Upload APK artifact
