@@ -34,18 +34,15 @@ jobs:
         python -m pip install --upgrade pip setuptools
         pip install buildozer cython==0.29.34 kivy["base"] aiohttp loguru
         
-    - name: Set up Android SDK and NDK
-      run: |
-        # Create directories for Android tools
-        mkdir -p ~/.buildozer/android/platform
-        # Buildozer will automatically download SDK and NDK if not present
-        # But we need to ensure we have the build-tools which include AIDL
-        echo "Configuring buildozer for Android build..."
-        
     - name: Build Android APK
+      env:
+        # Automatically accept Android SDK licenses
+        BUILD_TOOLS_VERSION: "30.0.3"
       run: |
-        # Accept Android SDK licenses automatically
-        yes | buildozer android accept-sdk-license
+        # Set environment variable to auto-accept licenses
+        export ANDROID_SDK_ROOT="$HOME/.buildozer/android/platform/android-sdk"
+        export PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH"
+        
         # Build the APK with verbose output
         buildozer -v android debug
         
