@@ -27,7 +27,9 @@ jobs:
           python3-virtualenv autoconf libtool pkg-config zlib1g-dev \
           libncurses5-dev libncursesw5-dev libtinfo6 cmake libffi-dev \
           libssl-dev automake autopoint gettext
-          curl https://sh.rustup.rs -sSf | sh
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
           
       # 4. 安装 Python 依赖
       - name: Install python dependencies
