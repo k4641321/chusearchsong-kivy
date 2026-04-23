@@ -47,3 +47,11 @@ jobs:
         with:
           name: android-apk
           path: bin/*.apk
+      
+      - name: 测试
+        run: |
+          buildozer -v android deploy run logcat | grep python
+
+      - name: 测试2
+        run: |
+          buildozer android deploy run logcat
