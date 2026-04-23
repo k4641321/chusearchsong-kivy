@@ -4,7 +4,7 @@
 title = chusearchsong
 
 # (str) Package name
-package.name = chusearchsong-kivy
+package.name = chusearchsongkivy
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = com.k4641321
